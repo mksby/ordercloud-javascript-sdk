@@ -7,9 +7,8 @@ import Configuration from '../Configuration'
  * @ignore
  * not part of public api, don't include in generated docs
  */
-const isNode = new Function(
-  'try {return this===global;}catch(e){return false;}'
-)
+const isNotWeb = () => typeof document !== undefined
+
 class Tokens {
   private accessTokenCookieName = `.access-token`
   private impersonationTokenCookieName = '.impersonation-token'
@@ -42,18 +41,18 @@ class Tokens {
    */
 
   public GetAccessToken(): string | undefined {
-    return isNode() ? this.accessToken : cookies.get(this.accessTokenCookieName)
+    return isNotWeb() ? this.accessToken : cookies.get(this.accessTokenCookieName)
   }
 
   public SetAccessToken(token: string): void {
     parseJwt(token) // check if token is valid
-    isNode()
+    isNotWeb()
       ? (this.accessToken = token)
       : cookies.set(this.accessTokenCookieName, token)
   }
 
   public RemoveAccessToken(): void {
-    isNode()
+    isNotWeb()
       ? (this.accessToken = '')
       : cookies.remove(this.accessTokenCookieName)
   }
@@ -63,20 +62,20 @@ class Tokens {
    */
 
   public GetImpersonationToken(): string | undefined {
-    return isNode()
+    return isNotWeb()
       ? this.impersonationToken
       : cookies.get(this.impersonationTokenCookieName)
   }
 
   public SetImpersonationToken(token: string): void {
     parseJwt(token) // check if token is valid
-    isNode()
+    isNotWeb()
       ? (this.impersonationToken = token)
       : cookies.set(this.impersonationTokenCookieName, token)
   }
 
   public RemoveImpersonationToken(): void {
-    isNode()
+    isNotWeb()
       ? (this.impersonationToken = null)
       : cookies.remove(this.impersonationTokenCookieName)
   }
@@ -86,19 +85,19 @@ class Tokens {
    */
 
   public GetRefreshToken(): string | undefined {
-    return isNode()
+    return isNotWeb()
       ? this.refreshToken
       : cookies.get(this.refreshTokenCookieName)
   }
 
   public SetRefreshToken(token: string): void {
-    isNode()
+    isNotWeb()
       ? (this.refreshToken = token)
       : cookies.set(this.refreshTokenCookieName, token)
   }
 
   public RemoveRefreshToken(): void {
-    isNode()
+    isNotWeb()
       ? (this.refreshToken = null)
       : cookies.remove(this.refreshTokenCookieName)
   }

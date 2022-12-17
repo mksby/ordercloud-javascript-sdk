@@ -1,5 +1,5 @@
 {
-  "name": "ordercloud-javascript-sdk",
+  "name": "@mksby/ordercloud-javascript-sdk",
   "description": "The offical Javascript SDK for the Ordercloud ecommerce API",
   "author": "Four51 OrderCloud",
   "version": "5.0.0-beta.3",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ordercloud-api/ordercloud-javascript-sdk"
+    "url": "git+https://github.com/ordercloud-api/ordercloud-javascript-sdk.git"
   },
   "keywords": [
     "ordercloud",
@@ -81,5 +81,12 @@
   },
   "peerDependencies": {
     "axios": "^1.1.0"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.17"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
   }
 }
